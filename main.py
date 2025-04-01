@@ -27,13 +27,16 @@ def extract_solution_for_given_table(table_index_to_extract:int ):
                 nombre_solution = nombre_solution + 1 
     print("-"*20)
     print("nombre soltuion")
-    print(nombre_solution)
-    solutions_with_table_index = []
-    for soltion in solutions :
-        solutions_with_table_index.append([soltion,table_index_to_extract])
+    print(nombre_solution) 
+    delta_x = 10000000
+    if len(solutions) >1 :
+        delta_x = solutions[1] - solutions[0]
     
-    write_solutions_in_csv_tables("solutions.csv",solutions_with_table_index)
+    delta_x_with_table_index = []
+    delta_x_with_table_index.append([table_index_to_extract,delta_x])
+    
+    write_solutions_in_csv_tables("solutions.csv", delta_x_with_table_index)
 if __name__ == "__main__":
-    for i in range(3):
+    for i in range(100):
         extract_solution_for_given_table(i+1 )
  
