@@ -139,3 +139,47 @@ def extract_xy_by_table_index(filename="tables.csv", target_table_index=None):
         print(f"An error occurred while reading the CSV file: {e}")
 
     return x_values, y_values
+
+ 
+def trouver_encadrement_dichotomie(mylist:list, x:float,debeug=False):
+    """
+    Trouve l'encadrement d'une valeur x dans une liste triée mylist.
+    
+    Args:
+        mylist: Une liste triée d'éléments.
+        x: La valeur à encadrer.
+    
+    Returns:
+        Un tuple (a, b) où a et b sont les indeces éléments de mylist tels que"
+    """
+    m=0
+    i = 0
+    j = len(mylist) - 1
+    if debeug :
+        print("i  j     m   x  mylist[i] mylist[j] mylist[m]")
+        print("-----------------------------------------------------")
+        print(f"{i}  {j}     {m}   {x}  {mylist[i]}       {mylist[j]}     {mylist[m]}")
+    if mylist[i] == x :
+        return (i, i)
+    elif mylist[j] == x : 
+        return (j, j)
+    else: 
+        while  j-i > 1 : 
+            k = (i + j) % 2 
+            if k == 0 :
+                m = int((i + j) / 2) 
+            elif k == 1 :   
+                m = int((i + j+1) / 2 ) 
+            if mylist[m] == x :
+                i = m
+                j = m 
+            
+            elif (mylist[i]-x)*(mylist[m]-x) < 0 : 
+                j = m
+            else :
+                i = m
+            if debeug :
+                print(f"{i}  {j}     {m}   {x}  {mylist[i]}       {mylist[j]}     {mylist[m]}")
+        return (i, j)
+    
+ 
